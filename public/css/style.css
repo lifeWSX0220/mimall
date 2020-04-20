@@ -1,0 +1,92 @@
+@charset "utf-8";
+/*初始化*/
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Microsoft Yahei", Arial, Helvetica, sans-serif;
+    color: #333;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+body, img, ul, ol, li, h1, h2, h3, h4, h5, h6, p, th, td, form {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+}
+
+img {
+    vertical-align: middle;
+    border: none;
+    -ms-interpolation-mode: bicubic;
+    width: 100%;
+}
+
+img.fdimg {
+    transition: 0.5s;
+    transform: scale3d(1, 1, 1);
+    -webkit-transition: 0.5s;
+    -webkit-transform: scale3d(1, 1, 1);
+    -o-transition: 0.5s;
+    -o-transform: scale3d(1, 1, 1);
+}
+
+img.fdimg:hover {
+    transform: scale3d(1.1, 1.1, 1);
+    transition: 0.5s;
+    -webkit-transform: scale3d(1.1, 1.1, 1);
+    -webkit-transition: 0.5s;
+    -o-transform: scale3d(1.1, 1.1, 1);
+    -o-transition: 0.5s;
+}
+
+ul, li {
+    list-style-type: none;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+.container {
+    margin: 0 auto;
+}
+
+/* 自定义变量 */
+:root{
+    --top_background:#333;
+    --shopcar_background:#f60;
+}
+
+
+
+/*响应式*/
+@media screen and (min-width: 1440px) {
+    .container {
+        max-width: 65.25%;
+    }
+}
+@media (max-width: 1440px) and (min-width: 1200px) {
+    .container {
+        max-width: 90.25%;
+    }
+}
+@media (max-width: 1200px) and (min-width: 960px) {
+    .container {
+        max-width: 92%;
+    }
+}
+@media (max-width: 960px) and (min-width: 768px) {}
+@media (max-width: 768px) and (min-width: 576px) {}
+@media (max-width: 576px) and (min-width: 320px) {}
