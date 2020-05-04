@@ -96,28 +96,7 @@
         </div>
       </div>
     </div>
-    <div class="service">
-      <div class="container">
-        <ul>
-          <li class="serve1">
-            <i class="fa fa-wrench"></i>
-            <span>预约维修服务</span>
-          </li>
-          <li class="serve2">
-            <i class="fa fa-handshake-o"></i>
-            <span>7天无理由退货</span>
-          </li>
-          <li class="serve3">
-            <i class="fa fa-phone"></i>
-            <span>15天免费换货</span>
-          </li>
-          <li class="serve4">
-            <i>邮</i>
-            <span>满150元包邮</span>
-          </li>
-        </ul>
-      </div>
-    </div>
+    <serviceBar></serviceBar>
     <modal title="提示" v-bind:showModal="showModal" define="查看购物车" v-on:submit="goToCart" v-on:closeModal="showModal=false">
       <template v-slot:modalBody>
         <p>商品添加成功！</p>
@@ -129,13 +108,15 @@
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import modal from '../components/modal';
+import serviceBar from '../components/Service-bar';
 import "swiper/css/swiper.css";
 export default {
   name: "index",
   components: {
     Swiper,
     SwiperSlide,
-    modal
+    modal,
+    serviceBar
   },
   data() {
     return {
@@ -488,27 +469,4 @@ export default {
   margin-left: 5px;
 }
 
-.service ul {
-  display: flex;
-  flex-direction: row;
-  padding: 33px 0 ;
-}
-
-.service ul li {
-  width: 25%;
-  text-align: center;
-  border-right: 1px solid #e5e5e5;
-}
-
-.service ul li span{
-  font-size: 16px;
-  color: #666;
-  margin-left: 10px;
-}
-
-.service ul li i {
-  font-size: 20px;
-  color: #666;
-  font-style: normal;
-}
 </style>
