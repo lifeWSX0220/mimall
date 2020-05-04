@@ -9,10 +9,11 @@
           <a href="#">协议规则</a>
         </div>
         <div class="topRight">
-          <a href="#">登录</a>
+          <a href="javascript:;" v-if="username">{{username}}</a>
+          <a href="/#/login" v-if="!username">登录</a>
           <a class="shopCar" href="#">
             <i class="fa fa-shopping-cart"></i>
-            <span>购物车(0)</span>
+            <span>购物车({{cartCount}})</span>
           </a>
         </div>
       </div>
@@ -21,7 +22,7 @@
       <div class="container">
         <div class="logo">
           <div>
-            <a href="#"></a>
+            <a href="/index"></a>
           </div>
         </div>
         <div class="navbar">
@@ -29,10 +30,14 @@
             <li>
               <span>小米手机</span>
               <div class="dropdown">
-                <a v-for="(item,index) in navList"  v-bind:href="'/#/product/'+item.id" v-bind:key="index">
+                <a
+                  v-for="(item, index) in navList"
+                  v-bind:href="'/#/product/' + item.id"
+                  v-bind:key="index"
+                >
                   <img v-bind:src="item.mainImage" alt="" />
-                  <p>{{item.name}}</p>
-                  <span>{{item.price | currency}}</span>
+                  <p>{{ item.name }}</p>
+                  <span>{{ item.price | currency }}</span>
                   <i></i>
                 </a>
               </div>
@@ -57,28 +62,35 @@
 <script>
 export default {
   name: "navHeader",
-  data(){
-    return{
-      navList:[]
-    }
+  data() {
+    return {
+      navList: []
+    };
   },
-  filters:{
-    currency(val){
-      if(!val) return "0.00";
-      return '￥' + val.toFixed(2) + '元';
+  filters: {
+    currency(val) {
+      if (!val) return "0.00";
+      return "￥" + val.toFixed(2) + "元";
+    },
+  },
+  computed:{
+    username(){
+      return this.$store.state.username;
+    },
+    cartCount(){
+      return this.$store.state.cartCount;
     }
   },
   mounted() {
     this.getNavlist();
   },
   methods: {
-    getNavlist() {
-      this.http.getData('/products',{
-        categoryId:100012,
-        pageSize:6
-      }).then((res) => {
-        this.navList = res.data.list;
+    async getNavlist() {
+      const result = await this.http("/products", "get", {
+        categoryId: "100012",
+        pageSize: 6
       });
+      this.navList = result.list;
     },
   },
 };

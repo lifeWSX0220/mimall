@@ -90,9 +90,7 @@
               <img v-lazy="item.mainImage" alt="" />
               <h4>{{ item.name }}</h4>
               <p>{{ item.subtitle }}</p>
-              <span class="price"
-                >{{ item.price }}元<i class="fa fa-shopping-cart"></i
-              ></span>
+              <span v-on:click="addCart" class="price">{{ item.price }}元<i class="fa fa-shopping-cart"></i></span>
             </li>
           </ul>
         </div>
@@ -120,20 +118,28 @@
         </ul>
       </div>
     </div>
+    <modal title="提示" v-bind:showModal="showModal" define="查看购物车" v-on:submit="goToCart" v-on:closeModal="showModal=false">
+      <template v-slot:modalBody>
+        <p>商品添加成功！</p>
+      </template>
+    </modal>
   </div>
 </template>
 
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import modal from '../components/modal';
 import "swiper/css/swiper.css";
 export default {
   name: "index",
   components: {
     Swiper,
     SwiperSlide,
+    modal
   },
   data() {
     return {
+      showModal:false,
       phoneList: [],
       swiperOption: {
         loop: true,
@@ -241,17 +247,19 @@ export default {
     this.getPhoneList();
   },
   methods: {
-    getPhoneList() {
-      this.http
-        .getData("/products", {
+    async getPhoneList() {
+      const result = await this.http("/products",'get', {
           categoryId: 100012,
           pageSize: 8,
-        })
-        .then((res) => {
-          this.phoneList = res.data.list;
-          console.log(res.data.list);
         });
+      this.phoneList = result.list
     },
+    addCart(){
+      this.showModal = true;
+    },
+    goToCart(){
+      this.$router.push('/cart');
+    }
   },
 };
 </script>
